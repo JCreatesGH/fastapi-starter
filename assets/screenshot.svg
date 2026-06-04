@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="500" viewBox="0 0 820 500" font-family="Segoe UI,Helvetica,Arial,sans-serif">
+  <rect width="820" height="500" fill="#fafafa"/>
+  <rect width="820" height="56" fill="#1b1b1b"/>
+  <text x="24" y="35" fill="#85ea2d" font-size="20" font-weight="700">FastAPI Starter</text>
+  <text x="225" y="35" fill="#aaa" font-size="13">/docs · OpenAPI 1.0.0</text>
+  <!-- method rows -->
+  <g font-size="13" font-family="SFMono-Regular,monospace">
+    <g transform="translate(24,76)"><rect width="772" height="34" rx="5" fill="#e8f6f0" stroke="#49cc90"/><rect width="62" height="34" rx="5" fill="#49cc90"/><text x="31" y="22" fill="#fff" text-anchor="middle" font-weight="700">POST</text><text x="78" y="22" fill="#3b4151" font-weight="600">/auth/register</text><text x="320" y="22" fill="#777">Create a new user account</text></g>
+    <g transform="translate(24,118)"><rect width="772" height="34" rx="5" fill="#e8f6f0" stroke="#49cc90"/><rect width="62" height="34" rx="5" fill="#49cc90"/><text x="31" y="22" fill="#fff" text-anchor="middle" font-weight="700">POST</text><text x="78" y="22" fill="#3b4151" font-weight="600">/auth/login</text><text x="320" y="22" fill="#777">Exchange credentials for a JWT</text></g>
+    <g transform="translate(24,160)"><rect width="772" height="34" rx="5" fill="#e7f0f7" stroke="#61affe"/><rect width="62" height="34" rx="5" fill="#61affe"/><text x="31" y="22" fill="#fff" text-anchor="middle" font-weight="700">GET</text><text x="78" y="22" fill="#3b4151" font-weight="600">/me</text><text x="320" y="22" fill="#777">Current authenticated user 🔒</text></g>
+    <g transform="translate(24,202)"><rect width="772" height="34" rx="5" fill="#e7f0f7" stroke="#61affe"/><rect width="62" height="34" rx="5" fill="#61affe"/><text x="31" y="22" fill="#fff" text-anchor="middle" font-weight="700">GET</text><text x="78" y="22" fill="#3b4151" font-weight="600">/items</text><text x="320" y="22" fill="#777">List items for the current user 🔒</text></g>
+    <g transform="translate(24,244)"><rect width="772" height="34" rx="5" fill="#e8f6f0" stroke="#49cc90"/><rect width="62" height="34" rx="5" fill="#49cc90"/><text x="31" y="22" fill="#fff" text-anchor="middle" font-weight="700">POST</text><text x="78" y="22" fill="#3b4151" font-weight="600">/items</text><text x="320" y="22" fill="#777">Create an item 🔒</text></g>
+    <g transform="translate(24,286)"><rect width="772" height="34" rx="5" fill="#fcefe3" stroke="#fca130"/><rect width="62" height="34" rx="5" fill="#fca130"/><text x="31" y="22" fill="#fff" text-anchor="middle" font-weight="700">PATCH</text><text x="78" y="22" fill="#3b4151" font-weight="600">/items/{id}</text><text x="320" y="22" fill="#777">Toggle done 🔒</text></g>
+    <g transform="translate(24,328)"><rect width="772" height="34" rx="5" fill="#fbe7e7" stroke="#f93e3e"/><rect width="62" height="34" rx="5" fill="#f93e3e"/><text x="26" y="22" fill="#fff" text-anchor="middle" font-weight="700">DEL</text><text x="78" y="22" fill="#3b4151" font-weight="600">/items/{id}</text><text x="320" y="22" fill="#777">Delete an item 🔒</text></g>
+  </g>
+  <!-- terminal -->
+  <rect x="24" y="382" width="772" height="96" rx="8" fill="#11111b"/>
+  <text font-size="13" font-family="SFMono-Regular,monospace" xml:space="preserve">
+    <tspan x="40" y="410" fill="#a6e3a1">$ pytest -q</tspan>
+    <tspan x="40" y="432" fill="#a6e3a1">............                                              [100%]</tspan>
+    <tspan x="40" y="454" fill="#a6e3a1">12 passed in 0.46s</tspan>
+    <tspan x="430" y="432" fill="#6c7086">JWT · PBKDF2 · SQLite · Docker</tspan>
+    <tspan x="430" y="454" fill="#6c7086">per-user data isolation tested</tspan>
+  </text>
+</svg>
