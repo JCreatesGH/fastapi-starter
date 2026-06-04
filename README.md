@@ -1,6 +1,6 @@
 # fastapi-starter
 
-[![CI](https://github.com/josh/fastapi-starter/actions/workflows/ci.yml/badge.svg)](https://github.com/josh/fastapi-starter/actions)
+[![CI](https://github.com/JCreatesGH/fastapi-starter/actions/workflows/ci.yml/badge.svg)](https://github.com/JCreatesGH/fastapi-starter/actions)
 [![Python](https://img.shields.io/badge/python-3.8%2B-blue)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
