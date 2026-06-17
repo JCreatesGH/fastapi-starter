@@ -1,8 +1,13 @@
 """SQLite access layer with a tiny migration runner."""
 from __future__ import annotations
 import sqlite3
+import threading
 from contextlib import contextmanager
 from typing import Iterator
+
+# The connection is shared (check_same_thread=False) so writes are serialized
+# to avoid interleaving when served by a multi-threaded worker.
+_write_lock = threading.Lock()
 
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS users (
@@ -35,9 +40,10 @@ def migrate(conn: sqlite3.Connection) -> None:
 
 @contextmanager
 def cursor(conn: sqlite3.Connection) -> Iterator[sqlite3.Cursor]:
-    cur = conn.cursor()
-    try:
-        yield cur
-        conn.commit()
-    finally:
-        cur.close()
+    with _write_lock:
+        cur = conn.cursor()
+        try:
+            yield cur
+            conn.commit()
+        finally:
+            cur.close()

@@ -69,3 +69,41 @@ def test_item_crud_and_isolation(client, auth):
 
 def test_openapi_served(client):
     assert client.get("/openapi.json").status_code == 200
+
+
+def test_email_is_normalized(client):
+    # registering with mixed case, then logging in lower-case must work...
+    r = client.post("/auth/register", json={"email": "Me@Example.com", "password": "password123"})
+    assert r.status_code == 201 and r.json()["email"] == "me@example.com"
+    tok = client.post("/auth/login", data={"username": "me@example.com", "password": "password123"})
+    assert tok.status_code == 200
+    # ...and a differently-cased re-register is a duplicate, not a second account
+    dup = client.post("/auth/register", json={"email": "ME@example.com", "password": "password123"})
+    assert dup.status_code == 409
+
+
+def test_patch_sets_title_and_done_explicitly(client, auth):
+    iid = client.post("/items", json={"title": "draft"}, headers=auth).json()["id"]
+    r = client.patch(f"/items/{iid}", json={"title": "final", "done": True}, headers=auth)
+    assert r.json() == {"id": iid, "title": "final", "done": True}
+    # explicit done=False (not a toggle)
+    r2 = client.patch(f"/items/{iid}", json={"done": False}, headers=auth)
+    assert r2.json()["done"] is False and r2.json()["title"] == "final"
+
+
+def test_items_pagination_and_filter(client, auth):
+    ids = [client.post("/items", json={"title": f"t{i}"}, headers=auth).json()["id"] for i in range(3)]
+    client.patch(f"/items/{ids[1]}", json={"done": True}, headers=auth)
+    assert len(client.get("/items?limit=2", headers=auth).json()) == 2
+    assert len(client.get("/items?limit=2&offset=2", headers=auth).json()) == 1
+    assert client.get("/items?limit=0", headers=auth).status_code == 400
+    done = client.get("/items?done=true", headers=auth).json()
+    assert [r["id"] for r in done] == [ids[1]]
+
+
+def test_default_secret_warns(tmp_path, caplog):
+    import logging
+    from app.main import create_app
+    with caplog.at_level(logging.WARNING, logger="fastapi_starter"):
+        create_app(db_path=str(tmp_path / "warn.db"))
+    assert any("SECRET_KEY" in r.message for r in caplog.records)

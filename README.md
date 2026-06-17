@@ -10,12 +10,13 @@ A production-shaped **FastAPI** starter you can clone and build on: JWT auth, pa
 
 ## Features
 
-- 🔐 **Auth** — register / login returning a signed **HS256 JWT**; passwords hashed with **PBKDF2-SHA256**.
-- 🗄️ **SQLite** access layer with an idempotent migration runner and foreign keys on.
+- 🔐 **Auth** — register / login returning a signed **HS256 JWT**; passwords hashed with **PBKDF2-SHA256**. Emails are normalized (lower-cased) so casing can't fork accounts, and the app **warns loudly if `SECRET_KEY` is left at the insecure default**.
+- 🗄️ **SQLite** access layer with an idempotent migration runner, foreign keys on, and serialized writes (safe under a threaded worker).
 - 👤 **Per-user data isolation** — every `/items` query is scoped to the token's user (and that's tested).
+- ✏️ **Real CRUD** — `PATCH /items/{id}` sets `title`/`done` explicitly (empty body toggles `done`); `GET /items` supports `?limit=&offset=&done=`.
 - 📚 **Swagger UI** at `/docs`, ReDoc at `/redoc`, schema at `/openapi.json` — free from FastAPI.
 - 🐳 **Docker + compose** with a persistent volume.
-- ✅ **12 tests** across API behavior and security primitives.
+- ✅ **16 tests** across API behavior and security primitives, run on a Python 3.9/3.11/3.12 matrix.
 
 ## Run it
 
